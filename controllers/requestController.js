@@ -2,9 +2,9 @@ import Request from "../models/request.js";
 
 export const generateRequestId = async (req, res) => {
 
+  console.log("saved in sessioin req.id",req.session.requestID)
   try {
     if (req.session.requestID) {
-      console.log("saved in sessioin req.id",req.session.requestID)
       res.status(200).send({ requestID: req.session.requestID });
     }
     else{
@@ -23,9 +23,10 @@ export const generateRequestId = async (req, res) => {
 };
 
 export const checkRequestId = async (req, res) => {
+  console.log("checkRequestId")
   try {
     const sessionData = req.session;
-    res.status(200).json({ requestID: sessionData.requestId });
+    res.status(200).json({ requestID: sessionData.requestID });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });
